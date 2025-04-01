@@ -97,7 +97,7 @@ function generarPDFPresupuesto() {
     const cliente = document.getElementById('presupuesto-cliente').value || 'Cliente';
     const evento = document.getElementById('presupuesto-evento').value;
     const salon = document.getElementById('presupuesto-salon').value;
-    const fechaEvento = document.getElementById('presupuesto-fecha-evento').value;
+    //const fechaEvento = document.getElementById('presupuesto-fecha-evento').value;
     const detalles = document.getElementById('presupuesto-detalles').value;
     const importe = parseFloat(document.getElementById('presupuesto-importe').value) || 0;
     const extrasContainer = document.getElementById('extras-container');
@@ -299,7 +299,7 @@ function generatePDF(elementId, filename) {
             const cliente = document.getElementById('presupuesto-cliente').value || 'Cliente';
             const evento = document.getElementById('presupuesto-evento').value;
             const salon = document.getElementById('presupuesto-salon').value;
-            const fechaEvento = document.getElementById('presupuesto-fecha-evento').value;
+            //const fechaEvento = document.getElementById('presupuesto-fecha-evento').value;
             const detalles = document.getElementById('presupuesto-detalles').value;
             const importe = parseFloat(document.getElementById('presupuesto-importe').value) || 0;
             const extrasContainer = document.getElementById('extras-container');
