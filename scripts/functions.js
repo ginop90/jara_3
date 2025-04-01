@@ -137,7 +137,7 @@ function generarPDFPresupuesto() {
     doc.text(`Cliente: ${cliente}`, 20, 75);
     doc.text(`Evento: ${evento}`, 20, 85);
     doc.text(`Salón: ${salon}`, 20, 95);
-    doc.text(`Fecha del evento: ${formatDate(fechaEvento)}`, 20, 105);
+    //doc.text(`Fecha del evento: ${formatDate(fechaEvento)}`, 20, 105);
 
     let y = 120;
     doc.setFillColor(230, 230, 230);
