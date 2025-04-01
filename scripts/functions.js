@@ -158,9 +158,7 @@ function generarPDFRecibo() {
     generatePDF('pdf-recibo', `Recibo_${cliente}_${formatDateFile(fecha)}`);
 }
 
-// Función para generar PDF usando html2canvas y jsPDF
-// Función optimizada para generar PDF
-// Función optimizada para generar PDF
+// Función modificada para generar PDF
 function generatePDF(elementId, filename) {
     const { jsPDF } = window.jspdf;
     
@@ -219,7 +217,29 @@ function generatePDF(elementId, filename) {
         // Añadir la imagen centrada con margen
         pdf.addImage(imgData, 'PNG', margin, margin, imgWidth, imgHeight);
         
-        pdf.save(`${filename}.pdf`);
+        try {
+            // Generar y descargar PDF
+            const pdfOutput = pdf.output('blob');
+            const url = URL.createObjectURL(pdfOutput);
+            
+            if (isMobile()) {
+                const file = new File([pdfOutput], `${filename}.pdf`, { type: 'application/pdf' });
+                if (navigator.share) {
+                    navigator.share({
+                        files: [file],
+                        title: filename
+                    });
+                }
+            } else {
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${filename}.pdf`;
+                link.click();
+            }
+        } catch (error) {
+            console.error('Error al generar el PDF:', error);
+            alert('Hubo un error al generar el PDF. Por favor, intente nuevamente.');
+        }
         
         // Restaurar estado original del elemento
         element.style.position = 'static';
@@ -229,21 +249,6 @@ function generatePDF(elementId, filename) {
         element.style.opacity = '0';
         element.style.visibility = 'hidden';
         element.style.display = 'none';
-        
-        // Si es móvil, intentar compartir el archivo
-        if (isMobile()) {
-            const blob = pdf.output('blob');
-            const file = new File([blob], `${filename}.pdf`, { type: 'application/pdf' });
-            
-            if (navigator.share) {
-                navigator.share({
-                    files: [file],
-                    title: filename,
-                }).catch((error) => {
-                    console.error('Error compartiendo archivo:', error);
-                });
-            }
-        }
     }).catch(error => {
         console.error('Error al generar PDF:', error);
         alert('Hubo un problema al generar el PDF. Intente nuevamente.');
